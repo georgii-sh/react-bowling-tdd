@@ -5,11 +5,11 @@ import Scores from '../../components/Scores/Scores';
 import { GameState } from '../../redux/gameReducer';
 
 const ScoresContainer: React.FC = () => {
-  const rolls = useSelector<{ gameReducer: GameState }, number[]>(
-    state => state.gameReducer.rolls
+  const rounds = useSelector<{ gameReducer: GameState }, number[][]>(
+    state => state.gameReducer.rounds
   );
 
-  return <Scores rolls={rolls} />;
+  return <Scores rounds={rounds} />;
 };
 
 export default ScoresContainer;

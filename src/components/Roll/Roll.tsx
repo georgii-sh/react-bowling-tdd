@@ -7,7 +7,7 @@ const Roll: React.FC = () => {
   const dispatch = useDispatch();
 
   const doRoll = (): void => {
-    dispatch(roll(5));
+    dispatch(roll(Math.ceil(Math.random() * 10)));
   };
 
   return (

@@ -5,7 +5,7 @@ import ScoreFrame from './ScoreFrame';
 describe('ScoreFrame', () => {
   it('should renders correct values for normal state ', () => {
     const { getByLabelText, queryByLabelText } = render(
-      <ScoreFrame first={5} second={2} total={7} />
+      <ScoreFrame round={[5, 2]} total={7} />
     );
     expect(getByLabelText('first')).toBeInTheDocument();
     expect(getByLabelText('first').textContent).toEqual('5');
@@ -19,7 +19,7 @@ describe('ScoreFrame', () => {
 
   it('should renders correct values for spare ', () => {
     const { getByLabelText, queryByLabelText } = render(
-      <ScoreFrame first={6} second={4} total={10} />
+      <ScoreFrame round={[6, 4]} total={10} />
     );
     expect(getByLabelText('first')).toBeInTheDocument();
     expect(getByLabelText('first').textContent).toEqual('6');
@@ -31,7 +31,7 @@ describe('ScoreFrame', () => {
 
   it('should renders correct values for strike ', () => {
     const { getByLabelText, queryByLabelText } = render(
-      <ScoreFrame first={10} second={0} total={10} />
+      <ScoreFrame round={[10]} total={10} />
     );
     expect(getByLabelText('first')).toBeInTheDocument();
     expect(getByLabelText('first').textContent).toEqual('10');

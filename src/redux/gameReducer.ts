@@ -2,10 +2,14 @@ import { GameAction } from './gameActions';
 
 export interface GameState {
   rolls: number[];
+  rounds: number[][];
+  currentRound: number;
 }
 
 const initialState: GameState = {
-  rolls: []
+  rolls: [],
+  rounds: [[]],
+  currentRound: 0
 };
 
 const gameReducer = (
@@ -18,11 +22,18 @@ const gameReducer = (
     case 'ROLL': {
       if (action.payload) {
         const { pins } = action.payload;
-        const newRolls = Array.from(state.rolls);
-        newRolls.push(pins);
+        const { currentRound, rounds } = state;
+        const newRounds = Array.from(rounds);
+        let newCurrentRound = currentRound;
+        if (newRounds[newCurrentRound].length > 1) {
+          newCurrentRound += 1;
+          newRounds[newCurrentRound] = [];
+        }
+        newRounds[newCurrentRound].push(pins);
         return {
           ...state,
-          rolls: newRolls
+          currentRound: newCurrentRound,
+          rounds: newRounds
         };
       }
       return state;

@@ -3,9 +3,8 @@ import React from 'react';
 import { css, InterpolationWithTheme } from '@emotion/core';
 
 interface Props {
-  first: number;
-  second?: number;
-  total: number;
+  round: number[];
+  total?: number;
 }
 
 const styles = {
@@ -49,14 +48,11 @@ const styles = {
   }
 };
 
-const Second: React.FC<{ first: number; second?: number }> = ({
-  first,
-  second
-}) => {
-  if (first === 10) {
+const Second: React.FC<{ round: number[] }> = ({ round }) => {
+  if (round[0] === 10) {
     return <div css={styles.strike} aria-label="strike" />;
   }
-  if (second && first + second === 10) {
+  if (round[1] && round[0] + round[1] === 10) {
     return (
       <div css={styles.spare} aria-label="spare">
         <div css={styles.triangle} />
@@ -65,19 +61,19 @@ const Second: React.FC<{ first: number; second?: number }> = ({
   }
   return (
     <div css={styles.second} aria-label="second">
-      {second}
+      {round[1]}
     </div>
   );
 };
 
-const ScoreFrame: React.FC<Props> = ({ first, second, total }) => {
+const ScoreFrame: React.FC<Props> = ({ round, total }) => {
   return (
-    <div css={styles.frame}>
+    <div css={styles.frame} aria-label="score-frame">
       <div css={{ display: 'flex' }}>
         <div css={styles.first} aria-label="first">
-          {first}
+          {round[0]}
         </div>
-        <Second first={first} second={second} />
+        <Second round={round} />
       </div>
       <div css={styles.total} aria-label="total">
         {total}
