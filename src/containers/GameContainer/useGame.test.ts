@@ -20,13 +20,8 @@ describe('useGame', () => {
 
     act(() => {
       roll(10);
-    });
-
-    act(() => {
       roll(2);
     });
-
-    console.log('rounds', rounds);
 
     expect(rounds).toStrictEqual([[10], [2]]);
   });

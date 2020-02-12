@@ -11,12 +11,20 @@ const GameContainer: React.FC = () => {
     roll(2);
   };
 
+  const doRoll2 = (): void => {
+    // roll(Math.ceil(Math.random() * 10));
+    roll(2);
+  };
+
   return (
     <>
       <Scores rounds={rounds} />
       <div>
         <button type="button" onClick={doRoll}>
-          Roll
+          Roll 10
+        </button>
+        <button type="button" onClick={doRoll2}>
+          Roll 2
         </button>
       </div>
     </>
