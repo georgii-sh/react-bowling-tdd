@@ -1,0 +1,11 @@
+# Ignore built files
+build/*
+
+# Ignore config files
+config/*
+
+# Ignore node_modules
+node_modules/*
+
+# Ignore scripts files
+src/serviceWorker.ts

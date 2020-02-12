@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.27",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,20 +11,59 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "customize-cra": "^0.9.1",
     "react": "^16.12.0",
+    "react-app-rewired": "^2.1.5",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "eject": "react-app-rewired eject",
     "lint": "eslint src/**/**.ts*",
     "test": "jest"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "semi": [
+        "warn",
+        "always"
+      ],
+      "quote-props": [
+        "warn",
+        "as-needed"
+      ],
+      "quotes": [
+        "warn",
+        "single"
+      ],
+      "prefer-template": "warn",
+      "template-curly-spacing": "warn",
+      "no-eval": "warn",
+      "no-useless-escape": "warn",
+      "prefer-rest-params": "warn",
+      "no-new-func": "warn",
+      "space-before-function-paren": [
+        "warn",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ],
+      "space-before-blocks": "warn",
+      "no-param-reassign": "warn",
+      "prefer-spread": "warn",
+      "prefer-arrow-callback": "warn",
+      "arrow-spacing": "warn",
+      "no-console": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -36,5 +76,37 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "babel": {
+    "presets": [
+      "react-app",
+      "@emotion/babel-preset-css-prop"
+    ],
+    "plugins": [
+      "emotion"
+    ]
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/serviceWorker.ts",
+      "!src/index.tsx"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.ts"
+    ],
+    "collectCoverage": true
+  },
+  "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "babel-plugin-emotion": "^10.0.27",
+    "react-app-rewire-emotion": "^4.0.0"
   }
 }
