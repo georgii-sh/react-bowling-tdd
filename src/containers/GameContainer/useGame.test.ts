@@ -27,4 +27,18 @@ describe('useGame', () => {
 
     expect(rounds).toStrictEqual([[10], [2]]);
   });
+
+  test('should return correct round with roll 10, 10', async () => {
+    const { result } = renderHook(() => useGame());
+    const [, roll] = result.current;
+
+    act(() => {
+      roll(10);
+      roll(10);
+    });
+
+    const [rounds] = result.current;
+
+    expect(rounds).toStrictEqual([[10], [10]]);
+  });
 });
