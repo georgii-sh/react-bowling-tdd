@@ -1,11 +1,13 @@
 # react-bowling-tdd
 
-Example of react bowling kata in react
+Example of react bowling kata in React.
+
+Using next.js and vitest
 
 ## Run
 
-`yarn start`
+`npm start`
 
 ## Tests
 
-`yarn test`
+`npm run test`

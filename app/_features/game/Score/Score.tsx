@@ -1,17 +1,16 @@
-import React from 'react';
-import ScoreFrame from '../ScoreFrame/ScoreFrame';
+import { ScoreFrame } from "./ScoreFrame/ScoreFrame";
 
-interface Props {
+type ScoreProps = {
   rounds: number[][];
-}
+};
 
-const Scores: React.FC<Props> = ({ rounds }) => {
+export function Score({ rounds }: ScoreProps) {
   const total = 0; //rolls.reduce((pins, total) => total + pins, 0);
   return (
     <div>
       <div>
-        {rounds.map((round, key) => (
-          <ScoreFrame key={`score-frame-${key}`} round={round} />
+        {rounds.map((round) => (
+          <ScoreFrame key={`${round[0]}_${round[1]}`} round={round} />
         ))}
       </div>
       <div>{JSON.stringify(rounds)}</div>
@@ -20,6 +19,4 @@ const Scores: React.FC<Props> = ({ rounds }) => {
       </div>
     </div>
   );
-};
-
-export default Scores;
+}
