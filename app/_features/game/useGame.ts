@@ -1,35 +1,21 @@
 import { useReducer, useState } from "react";
+import { getFrames } from "./getFrames";
 
-function roundsReducer(
-  rounds: number[][],
+function rollsReducer(
+  rolls: number[],
   action: { type: "new-game" | "roll"; payload?: number }
 ) {
   if (action.type === "new-game") {
-    return [[]];
+    return [];
   }
   if (action.type === "roll") {
-    const newRounds = Array.from(rounds);
-    const lastRound = newRounds[newRounds.length - 1];
-    if (
-      rounds.length >= 10 &&
-      (lastRound.length === 2 || lastRound[0] === 10)
-    ) {
-      return rounds;
-    }
-
-    lastRound.push(action.payload ?? 0);
-    if (lastRound.length === 2) {
-      newRounds.push([]);
-    } else if (action.payload === 10) {
-      newRounds.push([]);
-    }
-    return newRounds;
+    return [...rolls, action.payload!];
   }
   throw Error("Unknown action.");
 }
 
 export default function useGame() {
-  const [rounds, dispatch] = useReducer(roundsReducer, [[]]);
+  const [rolls, dispatch] = useReducer(rollsReducer, []);
 
   function roll(pins: number) {
     dispatch({ type: "roll", payload: pins });
@@ -39,5 +25,8 @@ export default function useGame() {
     dispatch({ type: "new-game" });
   }
 
-  return { rounds, roll, startNewGame };
+  const frames = getFrames(rolls);
+  const isFinished = frames.length === 10 && frames[9].length === 3;
+
+  return { frames, isFinished, roll, startNewGame };
 }

@@ -1,20 +1,44 @@
 type RoundsProps = { round: number[] };
+type RoundValueProps = { value: number };
 
-function First({ round }: RoundsProps) {
-  if (round[0] === 10) {
-    return "";
+function formatValue(value: number) {
+  if (value === 0) {
+    return "-";
   }
-  return round[0];
-}
-
-function Second({ round }: RoundsProps) {
-  if (round[0] === 10) {
+  if (value === 10) {
     return "X";
   }
-  if (round[1] && round[0] + round[1] === 10) {
-    return "/";
-  }
-  return round[1];
+  return value;
+}
+
+function First({ value }: RoundValueProps) {
+  return (
+    <div className="px-4 py-1 min-h-8 min-w-10" aria-label="first">
+      {formatValue(value)}
+    </div>
+  );
+}
+
+function Second({ value, isSpare }: RoundValueProps & { isSpare: boolean }) {
+  return (
+    <div
+      className="px-4 py-1 border-l-2 border-b-2 border-gray-400"
+      aria-label="second"
+    >
+      {isSpare ? "/" : formatValue(value)}
+    </div>
+  );
+}
+
+function Third({ value }: RoundValueProps) {
+  return (
+    <div
+      className="px-4 py-1 border-l-2 border-b-2 border-gray-400"
+      aria-label="third"
+    >
+      {formatValue(value)}
+    </div>
+  );
 }
 
 type ScoreFrameProps = {
@@ -23,23 +47,15 @@ type ScoreFrameProps = {
 };
 
 export function ScoreFrame({ round, total }: ScoreFrameProps) {
+  const [first, second, third] = round;
   return (
-    <div
-      className="inline-flex flex-col border-2 border-gray-400	"
-      aria-label="score-frame"
-    >
+    <div className="border-2 border-gray-400" aria-label="score-frame">
       <div className="flex">
-        <div className="px-4 py-2" aria-label="first">
-          <First round={round} />
-        </div>
-        <div
-          className="px-4 py-2 border-l-2 border-b-2 border-gray-400"
-          aria-label="second"
-        >
-          <Second round={round} />
-        </div>
+        <First value={first} />
+        <Second value={second} isSpare={first + second == 10} />
+        {third !== undefined ? <Third value={third} /> : null}
       </div>
-      <div className="text-center px-4 py-2" aria-label="total">
+      <div className="text-center bold min-h-8 px-4 py-2" aria-label="total">
         {total}
       </div>
     </div>

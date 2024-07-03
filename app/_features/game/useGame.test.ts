@@ -6,13 +6,14 @@ import { act } from "react";
 describe("useGame", () => {
   it("should return correct round with roll 2 and 3", () => {
     const { result } = renderHook(() => useGame());
-    const { rounds, roll } = result.current;
+    const { roll } = result.current;
     act(() => {
       roll(2);
       roll(3);
     });
+    const { frames } = result.current;
 
-    expect(rounds).toStrictEqual([[2, 3]]);
+    expect(frames).toStrictEqual([[2, 3]]);
   });
 
   it("should return correct round with roll 10 and 2", async () => {
@@ -22,9 +23,9 @@ describe("useGame", () => {
       roll(10);
       roll(2);
     });
-    const { rounds } = result.current;
+    const { frames } = result.current;
 
-    expect(rounds).toStrictEqual([[10], [2]]);
+    expect(frames).toStrictEqual([[10], [2]]);
   });
 
   it("should return correct round with roll 10, 10", async () => {
@@ -35,8 +36,8 @@ describe("useGame", () => {
       roll(10);
     });
 
-    const { rounds } = result.current;
+    const { frames } = result.current;
 
-    expect(rounds).toStrictEqual([[10], [10], []]);
+    expect(frames).toStrictEqual([[10], [10]]);
   });
 });

@@ -5,7 +5,7 @@ import { Score } from "./Score/Score";
 import useGame from "./useGame";
 
 export function Game() {
-  const { roll, startNewGame, rounds } = useGame();
+  const { roll, startNewGame, frames } = useGame();
 
   function roll3(): void {
     roll(3);
@@ -22,7 +22,7 @@ export function Game() {
 
   return (
     <>
-      <Score rounds={rounds} />
+      <Score frames={frames} />
       <div className="flex gap-4">
         <Button onClick={startNewGame}>New Game</Button>
         <Button onClick={roll3}>Roll 3</Button>
