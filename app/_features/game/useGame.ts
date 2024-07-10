@@ -1,5 +1,6 @@
-import { useReducer, useState } from "react";
-import { getFrames } from "./getFrames";
+"use client";
+
+import { useReducer } from "react";
 
 function rollsReducer(
   rolls: number[],
@@ -25,8 +26,7 @@ export default function useGame() {
     dispatch({ type: "new-game" });
   }
 
-  const frames = getFrames(rolls);
   const isFinished = frames.length === 10 && frames[9].length === 3;
 
-  return { frames, isFinished, roll, startNewGame };
+  return { isFinished, roll, rolls, startNewGame };
 }

@@ -1,17 +1,27 @@
+import { getFrames } from "../getFrames";
 import { ScoreFrame } from "./ScoreFrame/ScoreFrame";
+import { calculateScore } from "./calculateScore";
 
 type ScoreProps = {
-  frames: number[][];
+  rolls: number[];
 };
 
-export function Score({ frames }: ScoreProps) {
-  const total = 0; //rolls.reduce((pins, total) => total + pins, 0);
+export function Score({ rolls }: ScoreProps) {
+  const total = calculateScore(rolls);
+  const frames = getFrames(rolls);
   return (
     <div>
       <div className="flex gap-2">
-        {frames.map((round) => (
-          <ScoreFrame key={`${round[0]}_${round[1]}`} round={round} />
-        ))}
+        {frames.map((round, index) => {
+          const totalToFrame = calculateScore(rolls.slice(0, index + 1));
+          return (
+            <ScoreFrame
+              key={`${round[0]}_${round[1]}`}
+              round={round}
+              total={totalToFrame}
+            />
+          );
+        })}
       </div>
       <div>{JSON.stringify(frames)}</div>
       <div>
