@@ -11,9 +11,9 @@ describe("useGame", () => {
       roll(2);
       roll(3);
     });
-    const { frames } = result.current;
+    const { rolls } = result.current;
 
-    expect(frames).toStrictEqual([[2, 3]]);
+    expect(rolls).toStrictEqual([2, 3]);
   });
 
   it("should return correct round with roll 10 and 2", async () => {
@@ -23,9 +23,9 @@ describe("useGame", () => {
       roll(10);
       roll(2);
     });
-    const { frames } = result.current;
+    const { rolls } = result.current;
 
-    expect(frames).toStrictEqual([[10], [2]]);
+    expect(rolls).toStrictEqual([10, 2]);
   });
 
   it("should return correct round with roll 10, 10", async () => {
@@ -36,8 +36,8 @@ describe("useGame", () => {
       roll(10);
     });
 
-    const { frames } = result.current;
+    const { rolls } = result.current;
 
-    expect(frames).toStrictEqual([[10], [10]]);
+    expect(rolls).toStrictEqual([10, 10]);
   });
 });

@@ -1,4 +1,4 @@
-import { getFrames } from "../getFrames";
+import { getFrames } from "./getFrames";
 import { ScoreFrame } from "./ScoreFrame/ScoreFrame";
 import { calculateScore } from "./calculateScore";
 
@@ -7,8 +7,8 @@ type ScoreProps = {
 };
 
 export function Score({ rolls }: ScoreProps) {
-  const total = calculateScore(rolls);
   const frames = getFrames(rolls);
+  const total = calculateScore(rolls);
   return (
     <div>
       <div className="flex gap-2">

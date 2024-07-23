@@ -7,7 +7,7 @@ export const metadata = {
 export default function Page() {
   return (
     <div className="container mx-auto py-4">
-      <h1 className="text-4xl">React bowling score</h1>
+      <h1 className="text-4xl pb-4">React bowling score</h1>
       <Game />
     </div>
   );

@@ -26,7 +26,5 @@ export default function useGame() {
     dispatch({ type: "new-game" });
   }
 
-  const isFinished = frames.length === 10 && frames[9].length === 3;
-
-  return { isFinished, roll, rolls, startNewGame };
+  return { roll, rolls, startNewGame };
 }
